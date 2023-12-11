@@ -1,2 +1,8 @@
 *.pyc
 *.py[cod]
+*.tfstate
+*.tfstate.backup
+terraform/.terraform/*
+west_vpc/.terraform/*
+*.ckpt
+*.lock.hcl
