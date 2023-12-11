@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: recipe-generator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: recipe-generator
+  template:
+    metadata:
+      labels:
+        app: recipe-generator
+    spec:
+      containers:
+      - name: recipe-generator
+        image: morenodoesinfra/recipe-generator:latest
+        ports:
+        - name: http
+          containerPort: 5000

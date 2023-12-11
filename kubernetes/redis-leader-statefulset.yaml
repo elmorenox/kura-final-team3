@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: redis-leader
+spec:
+  serviceName: "redis-leader-service"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+      role: leader
+  template:
+    metadata:
+      labels:
+        app: redis
+        role: leader
+    spec:
+      containers:
+      - name: redis-leader
+        image: redis:latest
+        ports:
+        - containerPort: 6379
+

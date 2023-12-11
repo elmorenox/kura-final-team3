@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: redis-follower
+  labels:
+    app: redis
+    role: follower
+spec:
+  serviceName: "redis-follower-service"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+      role: follower
+  template:
+    metadata:
+      labels:
+        app: redis
+        role: follower
+    spec:
+      containers:
+      - name: redis-follower
+        image: redis:latest
+        command: ["redis-server", "--slaveof", "172.28.76.130", "6379"]
+
