@@ -24,8 +24,8 @@ eksctl create cluster cluster02 --vpc-private-subnets=$subnet_id_private_a,$subn
 eksctl create nodegroup --cluster cluster02 --node-type t2.medium --nodes 2 
 # apply deployment yaml which create app based on instructions 
 #the service yaml takes care of ports and how traffic will get to the deployment
-kubectl apply -f deployment.yaml 
-kubectl apply -f service.yaml
+kubectl apply -f recipe-generator-deployment.yaml
+kubectl apply -f recipe-generator-service.yaml
 
 sleep 240s
 ################################ ALB CONFIG ####################################################
@@ -56,10 +56,12 @@ kubectl apply -f ingress.yaml
 sleep 45s
 kubectl apply -f nginx-proxy-service.yaml
 sleep 20s
-kubectl apply -f redis-leader-service.yaml 
+kubectl apply -f redis-follower-service.yaml 
 sleep 20s
 kubectl apply -f nginx-config.yaml
 sleep 20s
 kubectl apply -f nginx-deployment.yaml
 sleep 20s
-kubectl apply -f redis-leader-statefulset.yaml
+kubectl apply -f redis-follower-statefulset.yaml
+sleep 20s
+kubectl apply -f celery-deployment.yaml
