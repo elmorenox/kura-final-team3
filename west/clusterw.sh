@@ -10,7 +10,7 @@ subnet_id_private_b=$(terraform output -raw subnet_id_private_b)
 # Outputs are local to the initTerra dir
 
 # Kuber dir has all necessary files
-cd ../Kuber/
+cd ../kubernetes/
 ########################## AWS CLI CONFIG ##########################################
 # Using the creditians created in jenkins and passing them to aws cli configure 
 # must have this setup to have access to aws account 
