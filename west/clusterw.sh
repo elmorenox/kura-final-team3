@@ -53,4 +53,13 @@ sleep 45s
 kubectl apply -f ingressClass.yaml  
 sleep 45s
 kubectl apply -f ingress.yaml
-
+sleep 45s
+kubectl apply -f nginx-proxy-service.yaml
+sleep 20s
+kubectl apply -f redis-leader-service.yaml 
+sleep 20s
+kubectl apply -f nginx-config.yaml
+sleep 20s
+kubectl apply -f nginx-deployment.yaml
+sleep 20s
+kubectl apply -f redis-leader-statefulset.yaml
