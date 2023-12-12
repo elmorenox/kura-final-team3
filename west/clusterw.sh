@@ -35,7 +35,7 @@ eksctl utils associate-iam-oidc-provider --cluster cluster02 --approve
 #create policy given the json file 
 # capture the output 
 
-output=(aws iam create-policy --policy-name AWSLoadBalancerControllerIAMPolicy --policy-document file://iam_policy.json)
+output=$(aws iam create-policy --policy-name AWSLoadBalancerControllerIAMPolicy --policy-document file://iam_policy.json)
 
 # Extract the ARN from the output using grep or other string manipulation
 arn=$(echo "$output" | jq -r '.Policy.Arn')
