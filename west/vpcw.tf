@@ -131,3 +131,7 @@ output "subnet_id_privateW_b" {
   value = aws_subnet.privateW_b.id
   
 }
+
+output "d10_vpcw_id" {
+  value = aws_vpc.d10_vpcW.id
+}
