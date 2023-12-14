@@ -17,7 +17,7 @@ resource "aws_internet_gateway" "igwW" {
 }
 ################## NGWW #######################
 resource "aws_nat_gateway" "ngwW" {
-  subnet_id     = aws_subnet.public_aW.id
+  subnet_id     = aws_subnet.public_a.id
   allocation_id = aws_eip.elastic-ip.id
 }
 ################# EIP ########################
