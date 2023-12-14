@@ -20,7 +20,7 @@ cd ../kubernetes/
 # must have this setup to have access to aws account 
 aws configure set aws_access_key_id ${AWS_ACCESS_KEY_ID}
 aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}
-aws configure set region us-east-1
+aws configure set region us-west-1
 ######################### CLUSTER CREATION ###########################################
 #creating a cluster given the subnets id that have been stored in variables
 eksctl create cluster cluster02 --vpc-private-subnets=$subnet_id_private_a,$subnet_id_private_b --vpc-public-subnets=$subnet_id_public_a,$subnet_id_public_b --without-nodegroup
