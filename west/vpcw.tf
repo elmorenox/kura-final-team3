@@ -26,7 +26,7 @@ resource "aws_eip" "elastic-ip" {
   
 }
 ############### SUBNETS #################### 
-resource "aws_subnet" "public_aW" {
+resource "aws_subnet" "public_a" {
   vpc_id            = aws_vpc.d10_vpcW.id
   cidr_block        = "172.0.1.0/24"
   availability_zone = "us-west-1a"
@@ -53,7 +53,7 @@ resource "aws_subnet" "public_b" {
   }
 }
 
-resource "aws_subnet" "privateW_a" {
+resource "aws_subnet" "private_a" {
   vpc_id            = aws_vpc.d10_vpcW.id
   cidr_block        = "172.0.3.0/24"
   availability_zone = "us-west-1a"
@@ -63,7 +63,7 @@ resource "aws_subnet" "privateW_a" {
   }
 }
 
-resource "aws_subnet" "privateW_b" {
+resource "aws_subnet" "private_b" {
   vpc_id            = aws_vpc.d10_vpcW.id
   cidr_block        = "172.0.4.0/24"
   availability_zone = "us-west-1c"
@@ -115,8 +115,8 @@ resource "aws_route_table_association" "privateW2" {
 }
 
 ################### OUTPUT #######################
-output "subnet_id_public_aW" {
-  value = aws_subnet.public_aW.id
+output "subnet_id_public_a" {
+  value = aws_subnet.public_a.id
 }
 
 output "subnet_id_public_b" {
@@ -124,11 +124,11 @@ output "subnet_id_public_b" {
 }
 
 output "subnet_id_privateW_a" {
-  value = aws_subnet.privateW_a.id
+  value = aws_subnet.private_a.id
   
 }
 output "subnet_id_privateW_b" {
-  value = aws_subnet.privateW_b.id
+  value = aws_subnet.private_b.id
   
 }
 
