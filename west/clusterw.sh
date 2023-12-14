@@ -11,7 +11,7 @@ subnet_id_private_b=$(terraform output -raw subnet_id_private_b)
 
 vpc_idw=$(terraform output -raw d10_vpcw_id)
 echo "West vpc id: $vpc_idw" >> vpc_id.txt
-aws s3 cp vpc_id.txt s3://d10bucket
+aws s3 cp vpc_id.txt s3://d10bucket/
 
 # Kuber dir has all necessary files
 cd ../kubernetes/
