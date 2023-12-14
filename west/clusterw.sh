@@ -58,6 +58,8 @@ kubectl apply -f ingressClass.yaml
 sleep 30s
 kubectl apply -f ingress.yaml
 
+kubectl apply -f redis-follower-configmap.yaml
+
 kubectl apply -f nginx-proxy-service.yaml
 
 kubectl apply -f redis-follower-service.yaml 
