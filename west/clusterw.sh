@@ -39,7 +39,7 @@ eksctl utils associate-iam-oidc-provider --cluster cluster02 --approve
 #create policy given the json file 
 # capture the output 
 
-output=$(aws iam create-policy --policy-name AWSLoadBalancerControllerIAMPolicy --policy-document file://iam_policy.json)
+output=$(aws iam create-policy --policy-name AWSLoadBalancerControllerIAMPolicy1 --policy-document file://iam_policy.json)
 
 # Extract the ARN from the output using grep or other string manipulation
 arn=$(echo "$output" | jq -r '.Policy.Arn')
@@ -49,13 +49,13 @@ arn=$(echo "$output" | jq -r '.Policy.Arn')
 eksctl create iamserviceaccount --cluster=cluster02 --namespace=kube-system --name=aws-load-balancer-controller --attach-policy-arn="$arn" --override-existing-serviceaccounts --approve
 ############################# YAML FILES ###############################################
 kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.5.4/cert-manager.yaml
-sleep 10s
+sleep 30s
 kubectl apply -k "github.com/aws/eks-charts/stable/aws-load-balancer-controller/crds"
-sleep 10s
+sleep 30s
 kubectl apply -f v2_4_7_full.yaml
-sleep 10s
+sleep 30s
 kubectl apply -f ingressClass.yaml  
-sleep 10s
+sleep 30s
 kubectl apply -f ingress.yaml
 
 kubectl apply -f nginx-proxy-service.yaml
