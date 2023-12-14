@@ -25,7 +25,7 @@ pipeline {
                     ]) {
                         
                         // Retrieve subnet IDs from Terraform
-                        sh 'chmod +x ./cluster.sh'
+                        sh 'chmod +x ./clusterw.sh'
                         sh './clusterw.sh'
                     }
                 }
