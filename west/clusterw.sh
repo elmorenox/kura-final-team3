@@ -49,23 +49,23 @@ arn=$(echo "$output" | jq -r '.Policy.Arn')
 eksctl create iamserviceaccount --cluster=cluster02 --namespace=kube-system --name=aws-load-balancer-controller --attach-policy-arn="$arn" --override-existing-serviceaccounts --approve
 ############################# YAML FILES ###############################################
 kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.5.4/cert-manager.yaml
-sleep 45s
+sleep 20s
 kubectl apply -k "github.com/aws/eks-charts/stable/aws-load-balancer-controller/crds"
-sleep 45s
+sleep 20s
 kubectl apply -f v2_4_7_full.yaml
-sleep 45s
+sleep 15s
 kubectl apply -f ingressClass.yaml  
-sleep 45s
+sleep 20s
 kubectl apply -f ingress.yaml
-sleep 45s
+
 kubectl apply -f nginx-proxy-service.yaml
-sleep 20s
+
 kubectl apply -f redis-follower-service.yaml 
-sleep 20s
+
 kubectl apply -f nginx-config.yaml
-sleep 20s
+
 kubectl apply -f nginx-deployment.yaml
-sleep 20s
+
 kubectl apply -f redis-follower-statefulset.yaml
-sleep 20s
+
 kubectl apply -f celery-deployment.yaml
