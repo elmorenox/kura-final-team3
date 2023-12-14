@@ -10,7 +10,7 @@ subnet_id_private_b=$(terraform output -raw subnet_id_private_b)
 # Outputs are local to the initTerra dir
 
 vpc_idw=$(terraform output -raw d10_vpcw_id)
-echo "vpc_west = '$vpc_idw'" >> vpc_id.txt
+echo "West vpc id: $vpc_idw" >> vpc_id.txt
 aws s3 cp vpc_id.txt s3://d10bucket/
 
 # Kuber dir has all necessary files
