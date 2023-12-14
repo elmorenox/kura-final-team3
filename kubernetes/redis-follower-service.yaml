@@ -10,4 +10,3 @@ spec:
   selector:
     app: redis
     role: follower
-
