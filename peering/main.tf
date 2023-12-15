@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "us-west-2"
+  region = "us-west-1"
   alias  = "west"
   access_key = var.access_key
   secret_key = var.secret_key
@@ -16,7 +16,7 @@ resource "aws_vpc_peering_connection" "vpc_peering" {
   provider      = aws.east
   vpc_id        = var.east_vpc_id
   peer_vpc_id   = var.peer_vpc_id
-  peer_region   = "us-west-2"
+  peer_region   = "us-west-1"
   auto_accept   = false
 
   tags = {
