@@ -9,24 +9,28 @@ subnet_id_private_a=$(terraform output -raw subnet_id_private_a)
 subnet_id_private_b=$(terraform output -raw subnet_id_private_b)
 # Outputs are local to the initTerra dir
 
-vpc_idw=$(terraform output -raw d10_vpcw_id)
-echo "West vpc id: $vpc_idw" >> vpc_id.txt
-aws s3 cp vpc_id.txt s3://d10bucket/
+vpc_idw=$(terraform output -raw d10_vpcw_id) 
+vpcw_cidr=$(terraform output -raw vpc_cidr)
+vpcw_route=$(terraform output -raw private_route_id)
+echo "peer vpc id: $vpc_idw" > vpc.txt
+echo "peer vpc cidr: $vpcw_cidr" > vpc.txt 
+echo "peer vpc route: $vpcw_route" > vpc.txt
+aws s3 cp vpc.txt s3://d10bucket/
 
-# Kuber dir has all necessary files
+# Kuber dir has all the necessary files
 cd ../kubernetes/
 ########################## AWS CLI CONFIG ##########################################
-# Using the creditians created in jenkins and passing them to aws cli configure 
+# Using the credentials created in jenkins and passing them to aws cli configure 
 # must have this setup to have access to aws account 
 aws configure set aws_access_key_id ${AWS_ACCESS_KEY_ID}
 aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}
 aws configure set region us-west-1
 ######################### CLUSTER CREATION ###########################################
-#creating a cluster given the subnets id that have been stored in variables
+#creating a cluster given the subnet id that has been stored in variables
 eksctl create cluster cluster02 --vpc-private-subnets=$subnet_id_private_a,$subnet_id_private_b --vpc-public-subnets=$subnet_id_public_a,$subnet_id_public_b --without-nodegroup
 #create cluster of size t2.med
 eksctl create nodegroup --cluster cluster02 --node-type t2.medium --nodes 2 
-# apply deployment yaml which create app based on instructions 
+# apply deployment yaml which creates app based on instructions 
 #the service yaml takes care of ports and how traffic will get to the deployment
 kubectl apply -f recipe-generator-deployment.yaml
 kubectl apply -f recipe-generator-service.yaml
@@ -44,7 +48,7 @@ output=$(aws iam create-policy --policy-name AWSLoadBalancerControllerIAMPolicy1
 # Extract the ARN from the output using grep or other string manipulation
 arn=$(echo "$output" | jq -r '.Policy.Arn')
 
-## figure out how to add arn here from previous command to fully automate
+## figure out how to add arn here from the previous command to fully automate
 ## Use varaibale to create iam service
 eksctl create iamserviceaccount --cluster=cluster02 --namespace=kube-system --name=aws-load-balancer-controller --attach-policy-arn="$arn" --override-existing-serviceaccounts --approve
 ############################# YAML FILES ###############################################
