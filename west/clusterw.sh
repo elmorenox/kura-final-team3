@@ -77,3 +77,5 @@ kubectl apply -f redis-follower-statefulset.yaml
 kubectl apply -f celery-deployment.yaml
 
 eksctl create iamidentitymapping  --region us-west-1 --cluster cluster02  --arn arn:aws:iam::294733426135:role/eks-lambda-role --username admin --group system:masters
+
+aws lambda invoke --function-name kubectl-update-config --invocation-type Event --payload fileb://event.json --region us-east-1 response.json
