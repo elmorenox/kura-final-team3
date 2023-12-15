@@ -12,25 +12,27 @@ aws s3 cp "s3://d10bucket/vpcw.txt" .
 
 ######################################################################################
 east_vpc_id=$(grep "East vpc id:" vpc.txt | awk '{print $NF}')
-east_vpc_cidr=$(grep "East vpc cidr:" | awk '{print $NF}')
-east_route_table=$(grep "East vpc route:" | awk '{print $NF}')
+east_vpc_cidr=$(grep "East vpc cidr:" vpc.txt | awk '{print $NF}')
+east_route_table=$(grep "East vpc route:" vpc.txt | awk '{print $NF}')
 
 #######################################################################################
-peer_vpc_id=$(grep "peer vpc id:" vpc.txt | awk '{print $NF}' )
-peer_vpc_cidr=$(grep "peer vpc cidr:" vpc.txt | awk '{print $NF}')
-peer_route_table=$(grep peer vpc route: vpc.txt | awk '{print $NF}')
+peer_vpc_id=$(grep "peer vpc id:" vpcw.txt | awk '{print $NF}' )
+peer_vpc_cidr=$(grep "peer vpc cidr:" vpcw.txt | awk '{print $NF}')
+peer_route_table=$(grep "peer vpc route:" vpcw.txt | awk '{print $NF}')
 
 #######################################################################################
 # Print the extracted VPC IDs
-echo "east_vpc_id = '$east_vpc_id'" > terraform.tfvars
-echo "east_vpc_cidr = '$east_vpc_cidr'" >> terraform.tfvars
-echo "east_route_table_id = '$east_route_table'" >> terraform.tfvars
+echo "east_vpc_id = \"$east_vpc_id\"" > terraform.tfvars
+echo "east_vpc_cidr = \"$east_vpc_cidr\"" >> terraform.tfvars
+echo "east_route_table_id = \"$east_route_table\"" >> terraform.tfvars
+
 
 #######################################################################################
-echo "peer_vpc_id = '$peer_vpc_id'" >> terraform.tfvars                              
-echo "peer_vpc_cidr = '$peer_vpc_cidr' " >> terraform.tfvars 
-echo "peer_route_table_id = '$peer_route_table'" >> terraform.tfvars
+echo "peer_vpc_id = \"$peer_vpc_id\"" >> terraform.tfvars
+echo "peer_vpc_cidr = \"$peer_vpc_cidr\"" >> terraform.tfvars
+echo "peer_route_table_id = \"$peer_route_table\"" >> terraform.tfvars
 
+chmod +x ./sg.sh
 ./sg.sh
 
 terraform init 
