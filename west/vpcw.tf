@@ -137,5 +137,5 @@ output "vpc_cidr" {
   value = aws_vpc.d10_vpcW.cidr_block
 }
 output "private_route_id" {
-  value = aws_route_table.private.id
+  value = aws_route_table.privateW.id
 }
