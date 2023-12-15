@@ -12,9 +12,9 @@ subnet_id_private_b=$(terraform output -raw subnet_id_private_b)
 vpc_idw=$(terraform output -raw d10_vpcw_id) 
 vpcw_cidr=$(terraform output -raw vpc_cidr)
 vpcw_route=$(terraform output -raw private_route_id)
-echo "peer vpc id: $vpc_idw" >> vpcw.txt
-echo "peer vpc cidr: $vpcw_cidr" > vpcw.txt 
-echo "peer vpc route: $vpcw_route" > vpcw.txt
+echo "peer vpc id: $vpc_idw" > vpcw.txt
+echo "peer vpc cidr: $vpcw_cidr" >> vpcw.txt 
+echo "peer vpc route: $vpcw_route" >> vpcw.txt
 aws s3 cp vpcw.txt s3://d10bucket/
 
 # Kuber dir has all the necessary files
