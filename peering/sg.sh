@@ -21,4 +21,4 @@ security_group_id2=$(echo "$output2" | awk '/Security Group ID 2/{gsub(/ /, "", 
 
 # Echo the security group IDs into terraform.tfvars
 echo "east_node_sg_id = \"$security_group_id1\"" >> terraform.tfvars
-echo "west_node_sg_id = \"$security_group_id2\"" >> terraform.tfvars
+echo "peer_node_sg_id = \"$security_group_id2\"" >> terraform.tfvars
