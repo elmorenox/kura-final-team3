@@ -128,10 +128,14 @@ output "subnet_id_private_a" {
   
 }
 output "subnet_id_private_b" {
-  value = aws_subnet.private_b.id
-  
+  value = aws_subnet.private_b.id 
 }
-
 output "d10_vpcw_id" {
   value = aws_vpc.d10_vpcW.id
+}
+output "vpc_cidr" {
+  value = aws_vpc.d10_vpcW.cidr_block
+}
+output "private_route_id" {
+  value = aws_route_table.private.id
 }
