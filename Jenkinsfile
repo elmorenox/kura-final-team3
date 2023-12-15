@@ -2,7 +2,7 @@ pipeline {
     agent { label 'agent2' } 
 
     stages {
-          stage('Terraform vpcWest') {
+        stage('Terraform vpcWest') {
             steps {
                 withCredentials([
                     string(credentialsId: 'AWS_ACCESS_KEY', variable: 'aws_access_key'),
@@ -16,20 +16,31 @@ pipeline {
                 }
             }
         }
-      stage('Deployeks') {
+        stage('Deploy EKS') {
             steps {
                 dir('west') {
                     withCredentials([
                         string(credentialsId: 'AWS_ACCESS_KEY', variable: 'AWS_ACCESS_KEY_ID'), 
                         string(credentialsId: 'AWS_SECRET_KEY', variable: 'AWS_SECRET_ACCESS_KEY')
                     ]) {
-                        
-                        // Retrieve subnet IDs from Terraform
                         sh 'chmod +x ./clusterw.sh'
                         sh './clusterw.sh'
                     }
                 }
             }
         }
+        stage('Peer Connect') {
+            steps {
+                dir('peering') {
+                    withCredentials([
+                        string(credentialsId: 'AWS_ACCESS_KEY', variable: 'AWS_ACCESS_KEY_ID'), 
+                        string(credentialsId: 'AWS_SECRET_KEY', variable: 'AWS_SECRET_ACCESS_KEY')
+                    ]) {
+                        sh 'chmod +x ./vpc.sh'
+                        sh './vpc.sh'
+                    }
+                }
+            }
+        }     
     }
 }
