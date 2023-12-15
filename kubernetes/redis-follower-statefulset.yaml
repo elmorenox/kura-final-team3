@@ -21,9 +21,10 @@ spec:
       containers:
       - name: redis-follower
         image: redis:latest
+        command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
         volumeMounts:
         - name: config
-          mountPath: /usr/local/etc/redis/
+          mountPath: /usr/local/etc/redis/redis.conf
           subPath: redis.conf
       volumes:
       - name: config
