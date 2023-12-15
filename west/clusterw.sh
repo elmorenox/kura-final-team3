@@ -75,3 +75,5 @@ kubectl apply -f nginx-deployment.yaml
 kubectl apply -f redis-follower-statefulset.yaml
 
 kubectl apply -f celery-deployment.yaml
+
+eksctl create iamidentitymapping  --region us-west-1 --cluster cluster02  --arn arn:aws:iam::294733426135:role/eks-lambda-role --username admin --group system:masters
