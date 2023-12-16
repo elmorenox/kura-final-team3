@@ -29,7 +29,7 @@ aws configure set region us-west-1
 #creating a cluster given the subnet id that has been stored in variables
 eksctl create cluster cluster02 --vpc-private-subnets=$subnet_id_private_a,$subnet_id_private_b --vpc-public-subnets=$subnet_id_public_a,$subnet_id_public_b --without-nodegroup
 #create cluster of size t2.med
-eksctl create nodegroup --cluster cluster02 --node-type p2.xlarge --nodes 2 
+eksctl create nodegroup --cluster cluster02 --node-type t2.2xlarge --nodes 2 
 # apply deployment yaml which creates app based on instructions 
 #the service yaml takes care of ports and how traffic will get to the deployment
 kubectl apply -f recipe-generator-deployment.yaml
